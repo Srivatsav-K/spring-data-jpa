@@ -1,0 +1,26 @@
+spring.application.name=springjpademo
+
+#DB configuration
+spring.datasource.url=jdbc:postgresql://localhost:5432/hospital_db
+spring.datasource.username=postgres
+spring.datasource.password=password
+
+
+# create-drop : migrates when server starts deletes when server stopped
+# create : whenever app starts existing data gets deleted and starts fresh
+# update : whenever entities are modified appropriate changes are applied to db
+# validate : check if entities and db are in sync or not
+# none : do nothing
+spring.jpa.hibernate.ddl-auto=update
+
+
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+
+# Defer initialisation of data source to a file
+spring.jpa.defer-datasource-initialization=true
+# runs sql : always, never
+spring.sql.init.mode=never
+# everything under resources folder will directly go into classpath
+spring.sql.init.data-locations=classpath:data.sql

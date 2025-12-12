@@ -1,0 +1,30 @@
+# root = true
+#
+# # Basic formatting
+# [*]
+# insert_final_newline = true
+# max_line_length = 120
+# trim_trailing_whitespace = true
+#
+# # Indentation
+# indent_style = space
+# indent_size = 2
+# tab_width = 2
+# ij_continuation_indent_size = 2
+#
+# # Misc
+# ij_java_method_brace_style = end_of_line
+# ij_java_if_brace_force = never
+#
+# # Wraps
+# ij_java_method_parameters_wrap = on_every_item
+# ij_java_keep_control_statement_in_one_line = false
+# # Enabling this can mess up some part of the code base. Need more analysis to get this right.
+# # ij_any_method_call_chain_wrap = on_every_item
+# # ij_java_align_multiline_chained_methods = true
+# # ij_java_wrap_first_method_in_call_chain = false
+#
+# # Enums
+# ij_java_enum_constants_wrap = on_every_item
+#
+# # Builder pattern specific
