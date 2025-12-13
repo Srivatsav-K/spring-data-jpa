@@ -1,8 +1,11 @@
 package com.example.springjpademo.repository;
 
+import com.example.springjpademo.dto.BloodGroupCountResponseEntity;
 import com.example.springjpademo.entites.Patient;
 import com.example.springjpademo.entites.type.BloodGroupType;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -55,4 +58,17 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
   // RAW SQL
   @Query(value = "SELECT * FROM patients ORDER BY created_at DESC", nativeQuery = true)
   List<Patient> findAllPatients();
+
+  // Projection : can be used to get the output of a query into a structured object instead of List<Object[]>
+  // Instead of p we need to pass the class reference and pass p.bloodGroup, Count(p) in constructor
+  // Note : Projections will only work with JPQL and not native queries, as hibernate is involved in this conversion
+  @Query("SELECT new com.example.springjpademo.dto.BloodGroupCountResponseEntity(p.bloodGroup, Count(p)) from " +
+      "Patient p GROUP BY p.bloodGroup ORDER BY Count(p) DESC")
+  List<BloodGroupCountResponseEntity> fetchAllBloodGroupTypeCountProjection();
+
+  // Pagination
+  // Can be used wherever a list is being returned even in JPQL or native SQL
+  @Query("SELECT p FROM Patient p")
+  Page<Patient> findAllPatientsPaginated(Pageable pageable);
+
 }

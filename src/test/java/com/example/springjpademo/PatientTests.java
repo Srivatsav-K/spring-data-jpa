@@ -1,13 +1,16 @@
 package com.example.springjpademo;
 
+import com.example.springjpademo.dto.BloodGroupCountResponseEntity;
 import com.example.springjpademo.entites.Patient;
 import com.example.springjpademo.entites.type.BloodGroupType;
 import com.example.springjpademo.repository.PatientRepository;
 import com.example.springjpademo.service.PatientService;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -129,5 +132,30 @@ class PatientTests {
     int affectedRows = patientRepository.updatePatientNameById("Krish", 12L);
 
     System.out.println("Affected rows : " + affectedRows);
+  }
+
+  @Test
+  void testFetchAllBloodGroupTypeCountProjection() {
+    List<BloodGroupCountResponseEntity> bloodGroupCountList = patientRepository.fetchAllBloodGroupTypeCountProjection();
+
+    for (BloodGroupCountResponseEntity bloodGroupCount : bloodGroupCountList) {
+      System.out.println(bloodGroupCount);
+    }
+  }
+
+  @Test
+  void testFetchAllPatientsPageable() {
+    Page<Patient> pageablePatients = patientRepository.findAllPatientsPaginated(
+        PageRequest.of(
+            1,
+            2,
+            Sort.by(Sort.Direction.DESC, "createdAt")
+        )
+    );
+
+    for (Patient patient : pageablePatients) {
+      System.out.println(patient);
+    }
+
   }
 }
