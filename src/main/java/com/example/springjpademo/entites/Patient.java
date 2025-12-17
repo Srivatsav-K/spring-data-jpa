@@ -1,6 +1,5 @@
 package com.example.springjpademo.entites;
 
-import com.example.springjpademo.dto.Appointment;
 import com.example.springjpademo.entites.type.BloodGroupType;
 import jakarta.persistence.*;
 import lombok.*;

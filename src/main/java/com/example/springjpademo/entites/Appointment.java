@@ -1,7 +1,5 @@
-package com.example.springjpademo.dto;
+package com.example.springjpademo.entites;
 
-import com.example.springjpademo.entites.BaseEntity;
-import com.example.springjpademo.entites.Patient;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
