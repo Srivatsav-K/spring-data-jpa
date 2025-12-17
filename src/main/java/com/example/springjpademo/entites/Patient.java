@@ -1,10 +1,13 @@
 package com.example.springjpademo.entites;
 
+import com.example.springjpademo.dto.Appointment;
 import com.example.springjpademo.entites.type.BloodGroupType;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(
@@ -49,4 +52,14 @@ public class Patient extends BaseEntity {
   @Enumerated(EnumType.STRING) // By default, it will be EnumType.ORDINAL : instead of string enum 0, 1, 2 will be used
   // to represent the string values
   private BloodGroupType bloodGroup;
+
+  @OneToOne(cascade = CascadeType.ALL) // creates a foreign_key & unique constraint as this is one to one mapping.
+  // If this is only present here then it is uni directional mapping.
+  // In bidirectional mapping, this becomes owning side and the other side is the inverse side
+  // Don't use bidirectional mapping use (mappedBy = "insurance") on the inverse side
+  @JoinColumn(name = "insurance_id", referencedColumnName = "id")
+  private Insurance insurance;
+
+  @OneToMany(mappedBy = "patient")
+  private List<Appointment> appointments = new ArrayList<>();
 }
